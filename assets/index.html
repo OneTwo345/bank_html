@@ -3,11 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>List of customers</title>
     <link rel="stylesheet" href="/assets/bootstrap/v5.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
     <link rel="stylesheet" href="/assets/css/custom-style.css">
+    <link rel="stylesheet" href="/assets/css/loading.css">
+    <script src="/assets/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/assets/jquery/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>List of customers</title>
 </head>
 
 <body>
@@ -18,10 +21,11 @@
                     <a class="navbar-brand">List of customers</a>
                     <div class="d-flex" style="gap: 10px;">
                         <button class="btn btn-outline-light" type="button">
+
                             <i class="fas fa-history"></i>
                             Transfer histories
                         </button>
-                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" id="btnShowModalCreate"
                             data-bs-target="#modalCreate">
                             <i class="far fa-plus-square"></i>
                             Add new customer
@@ -73,25 +77,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form method="post" id = "formCreate">
                         <div class="row mb-3 mt-3">
                             <div class="col-lg-6">
                                 <label for="fullNameCre" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="fullNameCre">
+                                <input type="text" name="fullNameCre" class="form-control" id="fullNameCre">
                             </div>
                             <div class="col-lg-6">
                                 <label for="emailCre" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="emailCre">
+                                <input type="email" name="emailCre" class="form-control" id="emailCre">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-lg-6">
                                 <label for="phoneCre" class="form-label">Phone</label>
-                                <input type="tel" class="form-control" id="phoneCre">
+                                <input type="tel" name="phoneCre" class="form-control" id="phoneCre">
                             </div>
                             <div class="col-lg-6">
                                 <label for="addressCre" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="addressCre">
+                                <input type="text" name="addressCre" class="form-control" id="addressCre">
                             </div>
                         </div>
                     </form>
@@ -116,32 +120,33 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form method="post" id = "formUpdate">
                         <div class="row mb-3 mt-3">
+                            <input type="hidden" id="idUp">
                             <div class="col-lg-6">
                                 <label for="fullNameUp" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="fullNameUp">
+                                <input type="text" name="fullNameUp" class="form-control" id="fullNameUp">
                             </div>
                             <div class="col-lg-6">
                                 <label for="emailUp" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="emailUp">
+                                <input type="email" name="emailUp" class="form-control" id="emailUp">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-lg-6">
                                 <label for="phoneUp" class="form-label">Phone</label>
-                                <input type="tel" class="form-control" id="phoneUp">
+                                <input type="tel" name = "phoneUp" class="form-control" id="phoneUp">
                             </div>
                             <div class="col-lg-6">
                                 <label for="addressUp" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="addressUp">
+                                <input type="text" name="addressUp" class="form-control" id="addressUp">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-outline-secondary" id="btnUpdate">
+                    <button type="button" class="btn btn-outline-secondary" id="btnUpdate">
                         <i class="fas fa-pencil"></i>
                         Update
                     </button>
@@ -162,25 +167,30 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <form method="post">
+                  <form method="post" id="formDeposit">
+
                       <div class="row mb-3">
+                            <div class="col-lg-4" style="display: none;">
+                                <label for="idDes" >ID</label>
+                                <input type="text" name="idDes" id="idDes" class="form-control" readonly>
+                            </div>
                           <div class="col-lg-6">
                               <label class="fw-bold">Full Name</label>
-                              <input type="text" class="form-control" id="fullNameDep" readonly>
+                              <input type="text" name="fullNameDep" class="form-control" id="fullNameDep" readonly>
                           </div>
                           <div class="col-lg-6">
                               <label class="fw-bold">Email</label>
-                              <input type="email" class="form-control" id="emailDep" readonly>
+                              <input type="email" name="emailDep" class="form-control" id="emailDep" readonly>
                           </div>
                       </div>
                       <div class="row mb-3">
                           <div class="col-lg-6">
                               <label class="fw-bold">Current Balance</label>
-                              <input type="tel" class="form-control" id="balanceDep" readonly>
+                              <input type="tel" name="balanceDep" class="form-control" id="balanceDep" readonly>
                           </div>
                           <div class="col-lg-6">
                               <label class="fw-bold">Transaction Amount</label>
-                              <input type="text" class="form-control" id="transactionAmountDep">
+                              <input type="text" name="transactionAmountDep" class="form-control" id="transactionAmountDep">
                           </div>
                       </div>
                   </form>
@@ -206,25 +216,29 @@
                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">
-                   <form method="post">
+                   <form method="post" id="formWithdraw">
                        <div class="row mb-3">
+                            <div class="col-lg-4" style="display: none">
+                                <label for="idWdr">ID</label>
+                                <input type="text" name="idWdr" id="idWdr" class="form-control" readonly>
+                            </div>
                            <div class="col-lg-6">
                                <label class="fw-bold">Full Name</label>
-                               <input type="text" class="form-control" id="fullNameWith" readonly>
+                               <input type="text" name="fullNameWith" class="form-control" id="fullNameWith" readonly>
                            </div>
                            <div class="col-lg-6">
                                <label class="fw-bold">Email</label>
-                               <input type="email" class="form-control" id="emailWith" readonly>
+                               <input type="email" name="emailWith" class="form-control" id="emailWith" readonly>
                            </div>
                        </div>
                        <div class="row mb-3">
                            <div class="col-lg-6">
                                <label class="fw-bold">Current Balance</label>
-                               <input type="tel" class="form-control" id="balanceWith" readonly>
+                               <input type="tel" name="balanceWith" class="form-control" id="balanceWith" readonly>
                            </div>
                            <div class="col-lg-6">
                                <label class="fw-bold">Transaction Amount</label>
-                               <input type="text" class="form-control" id="transactionAmountWith">
+                               <input type="text" name="transactionAmountWith" class="form-control" id="transactionAmountWith">
                            </div>
                        </div>
                    </form>
@@ -249,45 +263,45 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="post">
+          <form method="post" id="formTransfer">
             <!-- 1 -->
             <div class="row mb-3 mt-3">
               <div class="col-lg-3">
                 <label for="IdSender" class="form-label">Sender ID</label>
-                <input type="text" class="form-control" id="IdSender" readonly="readonly">
+                <input type="text" class="form-control" name="idSender" id="idSender" readonly="readonly">
               </div>
               <div class="col-lg-3">
-                <label for="nameSender" class="form-label">Sender Name</label>
-                <input type="text" class="form-control" id="nameSender" readonly="readonly">
+                <label for="senderName" class="form-label">Sender Name</label>
+                <input type="text" class="form-control" name="senderName" id="senderName" readonly="readonly">
               </div>
               <div class="col-lg-3">
                 <label for="emailSender" class="form-label">Sender Email</label>
-                <input type="email" class="form-control" id="emailSender" readonly="readonly">
+                <input type="email" name="emailSender" class="form-control" id="emailSender" readonly="readonly">
               </div>
               <div class="col-lg-3">
                 <label for="balanceSender" class="form-label">Sender balance ($)</label>
-                <input type="text" class="form-control" id="balanceSender" readonly="readonly">
+                <input type="text" name="balanceSender" class="form-control" id="balanceSender" readonly="readonly">
               </div>
             </div>
             <!-- 2 -->
             <div class="row mb-3">
               <div class="col-lg-3">
                 <label for="nameRecipient" class="form-label">Recipient Name</label>
-                <select class="form-control" id="nameRecipient">
-                  <option id="option"></option>
+                <select class="form-control" name="nameRecipient" id="nameRecipient">
+                  <!-- <option id="option"></option> -->
                 </select>
               </div>
               <div class="col-lg-3">
                 <label for="transferAmount" class="form-label">Transfer Amount ($)</label>
-                <input type="number" class="form-control" id="transferAmount">
+                <input type="number" name="transferAmount" class="form-control" id="transferAmount">
               </div>
               <div class="col-lg-3">
                 <label for="fees" class="form-label">Fees (%)</label>
-                <input type="text" class="form-control" id="fees" value="10" readonly="readonly">
+                <input type="text" name="fees" class="form-control" id="fees" value="10" readonly="readonly">
               </div>
               <div class="col-lg-3">
                 <label for="totalAmount" class="form-label">Total Amount</label>
-                <input type="text" class="form-control" id="totalAmount" readonly="readonly">
+                <input type="text" name="totalAmount" class="form-control" id="totalAmount" readonly="readonly">
               </div>
             </div>
           </form>
@@ -302,197 +316,175 @@
       </div>
     </div>
   </div>
+
+        <!-- Modal Transfer Info-->
+        <div class="modal fade" id="modalTransferInfo">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Modal Transfer Info</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <table class="table table-striped">
+                            <tr style="background-color: #4caf50">
+                                <th>ID</th>
+                                <th>Sender Name</th>
+                                <th>Recipient Name</th>
+                                <th>Transfer Amount</th>
+                                <th>Fees</th>
+                                <th>Transaction Amount</th>
+                                <th>Date</th>
+                            </tr>
+                            <tbody id="history-body">
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/web-toast/src/webToast.js"></script>
+        <script src="/base.js"></script>
  
 
     <script>
 
-        const bodyCustomer = document.querySelector('#tbCustomer tbody')
-        const btnCreate = document.getElementById('btnCreate');
-        const btnUpdate = document.getElementById('btnUpdate');
-        const btnDelete = document.getElementById('btnDelete');
-        const btnDeposit = document.getElementById('btnDeposit')
-        const btnWithdraw = document.getElementById('btnWithdraw')
-        const btnTransfer = document.getElementById('btnTransfer')
+        // const bodyCustomer = document.querySelector('#tbCustomer tbody')
+        const btnShowModalCreate = $('#btnShowModalCreate');
+        const formCreate = $('#formCreate');
+        const strBody = $('#tbCustomer tbody')
+        const btnCreate = $('#btnCreate');
+        const modalCreate = $('#modalCreate');
+        const fullNameCre = $('#fullNameCre');
+        const emailCre = $('#emailCre');
+        const addressCre = $('#addressCre');
+        const phoneCre = $('#phoneCre');
 
-        const toastLive = document.getElementById('liveToast')
-        const toastBody = document.getElementById('toast-body')
-        const btnCloseToast = document.getElementById('btnCloseToast')
+        // const btnUpdate = document.getElementById('btnUpdate');
+        const btnUpdate = $('#btnUpdate');
+        const modalUpdate = $('#modalUpdate');
+        const formUpdate = $('#formUpdate');
+        const addressUp = $('#addressUp');
+        const fullNameUp = $('#fullNameUp');
+        const emailUp = $('#emailUp');
+        const phoneUp = $('#phoneUp');
 
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive)
+        // const btnDelete = document.getElementById('btnDelete');
+        const btnDelete = $('#btnDelete');
 
 
-        let personId = 0;
+        // const btnDeposit = document.getElementById('btnDeposit')
 
-        async function fetchALlPerson() {
-            const response = await fetch("http://localhost:3300/persons");
-            const persons = await response.json();
-            // return persons
-            const filteredPersons = persons.filter((person) => person.deleted == 0);
-             return filteredPersons;
-             console.log(filteredPersons)
-        }
+        const btnDeposit = $('#btnDeposit');
+        const modalDeposit = $('#modalDeposit');
+        const formDeposit = $('#formDeposit');
+        const idDep = $('#idDes');
+        const fullNameDep = $('#fullNameDep');
+        const emailDep = $('#emailDep');
+        const balanceDep = $('#balanceDep');
+        const transactionAmountDep = $('#transactionAmountDep');
 
-        const getALlPerson = async () => {
-            const persons = await fetchALlPerson();
-            console.log(persons);
 
-            persons.forEach(item => {
-                const str = renderPerson(item)
-                bodyCustomer.innerHTML += str;
-            });
 
-            const btnEditElems = document.querySelectorAll('.edit')
-            const btnDeleteElems = document.querySelectorAll('.delete')
-            const btnDepositElems = document.querySelectorAll('.deposit')
-            const btnWithdrawElems = document.querySelectorAll('.withdraw')
-            
-          
+        const btnWithdraw = $('#btnWithdraw');
+        const modalWithdraw = $('#modalWithdraw');
+        const formWithdraw = $('#formWithdraw');
+        const idWdr = $('#idWdr');
+        const fullNameWith = $('#fullNameWith');
+        const emailWith = $('#emailWith');
+        const balanceWith = $('#balanceWith');
+        const transactionAmountWith = $('#transactionAmountWith');
 
-            btnEditElems.forEach(item => {
-                item.addEventListener('click', async () => {
-                    // const id = item.id.replace('data_', '')
-                    personId = item.getAttribute('data-id')
-
-                    const person = await getPersonById(personId);
-                    // console.log(person);
-
-                    openModal('modalUpdate')
-
-                    document.getElementById('fullNameUp').value = person.fullName
-                    document.getElementById('emailUp').value = person.email
-                    document.getElementById('phoneUp').value = person.phone
-                    document.getElementById('addressUp').value = person.address
-
-                })
-            })
-
-            btnDepositElems.forEach(item => {
-                item.addEventListener('click', async () => {
-                    // const id = item.id.replace('data_', '')
-                    personId = item.getAttribute('data-id')
-
-                    const person = await getPersonById(personId);
-                    // console.log(person);
-
-                    openModal('modalDeposit')
-
-                    document.getElementById('fullNameDep').value = person.fullName;
-                    document.getElementById('emailDep').value = person.email;
-                    document.getElementById('balanceDep').value = person.balance;
-                    document.getElementById('transactionAmountDep').value = 0;
-
-                })
-            })
-
-            btnWithdrawElems.forEach(item => {
-                item.addEventListener('click', async () => {
-                    // const id = item.id.replace('data_', '')
-                    personId = item.getAttribute('data-id')
-
-                    const person = await getPersonById(personId);
-                    // console.log(person);
-
-                    openModal('modalWithdraw')
-
-                    document.getElementById('fullNameWith').value = person.fullName;
-                    document.getElementById('emailWith').value = person.email;
-                    document.getElementById('balanceWith').value = person.balance;
-                    document.getElementById('transactionAmountWith').value = 0;
-                })
-            })
-
-            btnDeleteElems.forEach(item => {
-            item.addEventListener('click', () => {
-            const personId = item.getAttribute('data-id')
-            deletePerson(personId)
-            })
-        })
-        }
-
-        const getPersonById = async (personId) => {
-            const response = await fetch("http://localhost:3300/persons/" + personId);
-            const person = await response.json();
-            return person
-        }
-
-        const fetchUpdatePerson = async (personId, obj) => {
-            const response = await fetch("http://localhost:3300/persons/" + personId, {
-                method: 'PATCH',
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                body: JSON.stringify(obj)
-            });
-            const person = await response.json();
-            return person
-        }
-
-        const fetchDepositPerson = async (personId, obj) => {
-            const response = await fetch("http://localhost:3300/persons/" + personId, {
-                method: 'PATCH',
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                body: JSON.stringify(obj)
-            });
-            const person = await response.json();
-            return person
-        }
-
-        const fetchWithdrawPerson = async (personId, obj) => {
-            const response = await fetch("http://localhost:3300/persons/" + personId, {
-                method: 'PATCH',
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                body: JSON.stringify(obj)
-            });
-            const person = await response.json();
-            return person
-        }
-
-        const deletePerson = async (personId) => {
-        const confirmed = confirm("Bạn có chắc chắn muốn xóa khách hàng này?");
-
-        if (!confirmed) {
-        return;
-        }
-
-         const response = await fetch(`http://localhost:3300/persons/${personId}`, {
-        method: 'PATCH',
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify({ deleted: 1 })
-         });
-
-        if (response.ok) {
-        const deleteRow = document.getElementById('tr_' + personId);
-        deleteRow.remove();
-
-        toastBody.innerText = 'Xóa khách hàng thành công';
-        toastBootstrap.show();
-
-        setTimeout(() => {
-            btnCloseToast.click();
-        }, 2500);
-        } else {
-        toastBody.innerText = 'Xóa khách hàng thất bại';
-        toastBootstrap.show();
-
-        setTimeout(() => {
-            btnCloseToast.click();
-        }, 2500);
-        }
-        };
+         // const btnTransfer = document.getElementById('btnTransfer')
+        const btnTransfer = $('#btnTransfer');
+        const modalTransfer = $('#modalTransfer');
+        const formTransfer = $('#formTransfer');
+        const senderName = $('#senderName');
+        const senderId = $('#idSender');
+        const senderEmail = $('#emailSender');
+        const senderBalance = $('#balanceSender');
+        const fee = $('#fees');
+        const selectOptionRecipientStr = $('#nameRecipient');
+        const transferAmount = $('#transferAmount');
+        const totalAmountTr = $('#totalAmount');
 
 
        
-    
+        // const feesInput = document.getElementById('fees');
+        // const totalAmountInput = document.getElementById('totalAmount');
+
+
+        // const toastLive = document.getElementById('liveToast')
+        // const toastBody = document.getElementById('toast-body')
+        // const btnCloseToast = document.getElementById('btnCloseToast')
+
+        let persons = [];
+        let histories = [];
+        const strBodyHistory = $("#history-body");
+        const btnHistory = $('#btnShowModalTransferInfo');
+        const modalHistory = $('#modalTransferInfo');
+
+        // const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive)
+
+
+        // let personId = 0;
+
+        const renderNameRecipient = (obj) => {
+        return `
+            <option value="${obj.id}">${obj.fullName}</option>
+        `
+        }
+
+        async function getAllPersons() {
+            const response = await fetch("http://localhost:3300/persons");
+            const personList = await response.json();
+            const filteredPersons = personList.filter(person => person.deleted !== 1);
+            persons = filteredPersons;
+            filteredPersons.sort((a, b) => b.id - a.id);
+
+            filteredPersons.forEach(item => {
+                const str = renderPerson(item);
+                strBody.append(str);
+            });
+        }
+
+        async function getAllHistories() {
+        const historiesRes = await fetch('http://localhost:3300/histories');
+        histories = await historiesRes.json();
+        histories.forEach(item => {
+            const str = renderHistory(item);
+            strBodyHistory.append(str);
+
+        })
+        }
+
+        const renderHistory = (obj) => {
+        const date = new Date(obj.date);
+        const formattedDate = date.toLocaleString();
+        return `
+          <tr>
+                    <td>${obj.id}</td>
+                    <td>${obj.senderName}</td>
+                    <td>${obj.recipientName}</td>
+                    <td>${obj.transferAmount}</td>
+                    <td>${obj.fee}</td>
+                    <td>${obj.totalAmount}</td>
+                    <td>${formattedDate}</td>
+          </tr>
+                    `
+        }
+
 
         const renderPerson = (obj) => {
-            return `
-                <tr id="tr_${obj.id}">
+        return `
+        <tr id="tr_${obj.id}">
                     <td>${obj.id}</td>
                     <td>${obj.fullName}</td>
                     <td>${obj.email}</td>
@@ -500,176 +492,1026 @@
                     <td>${obj.address}</td>
                     <td>${obj.balance}</td>
                     <td>
-                        <button class="btn btn-outline-secondary edit" id="data_${obj.id}" data-id="${obj.id}">
-                            <i class="far fa-edit"></i>
+                        <button title = "Edit" class="btn btn-outline-secondary edit" data-id="${obj.id}">
+                            <i class="fas fa-user-edit"></i>
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-outline-success deposit" id="data_${obj.id}" data-id="${obj.id}">
+                        <button title = "Deposit" class="btn btn-outline-success deposit" data-id="${obj.id}">
                             <i class="fas fa-plus"></i>
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-outline-warning withdraw" id="data_${obj.id}" data-id="${obj.id}">
+                        <button title = "Withdraw" class="btn btn-outline-warning withdraw" data-id = "${obj.id}">
                             <i class="fas fa-minus"></i>
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-outline-primary">
+                        <button title = "Transfer" class="btn btn-outline-primary transfer" data-id = "${obj.id}">
                             <i class="fas fa-exchange-alt"></i>
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-outline-danger delete" id="data_${obj.id}" data-id="${obj.id}">
-                            <i class="fas fa-ban"></i>
+                        <button title = "Delete" class="btn btn-outline-danger delete" data-id="${obj.id}">
+                            <i class="fas fa-user-slash"></i>
                         </button>
                     </td>
                 </tr>
-            `
+        `
+    }
+
+
+    const createPerson = async () => {
+        btnCreate.attr('disabled', true);
+        let person = {
+            "id": null,
+            "fullName": fullNameCre.val(),
+            "email": emailCre.val(),
+            "address": addressCre.val(),
+            "phone": phoneCre.val(),
+            "balance": 0
+        };
+
+        const response = await fetch('http://localhost:3300/persons', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(person)
+        })
+
+        const personNew = await response.json();
+        const str = renderPerson(personNew);
+        strBody.prepend(str);
+
+        webToast.Success({
+            status: 'Thêm thành công',
+            message: '',
+            delay: 2000,
+            align: 'topright'
+        });
+
+        btnCreate.attr('disabled', false);
+        modalCreate.modal('hide');
+     }
+
+     const deletePerson = () => {
+        strBody.on('click', '.delete', function () {
+        const id = $(this).data('id');
+        console.log(id);
+        var confirmBox = webToast.confirm("Are you sure you want to delete??");
+        confirmBox.click(async function () {
+        confirmBox.attr('disabled', true);
+
+        let person = {
+            "id": id,
+            "deleted": 1
+        };
+
+        const response = await fetch('http://localhost:3300/persons/' + id, {
+            method: 'PUT', 
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(person)
+        });
+
+        refreshData();
+
+        webToast.Success({
+            status: 'Đã đánh dấu xóa',
+            message: '',
+            delay: 2000,
+            align: 'top right'
+        });
+
+        confirmBox.attr('disabled', false);
+        });
+    });
+    };
+
+     const showModalUpdate = () => {
+        strBody.on('click', '.edit', async function () {
+            const id = $(this).data('id');
+
+            const reponse = await fetch('http://localhost:3300/persons/' + id);
+            const person = await reponse.json();
+
+
+            $('#idUp').val(person.id);
+            $('#fullNameUp').val(person.fullName);
+            $('#emailUp').val(person.email);
+            $('#phoneUp').val(person.phone);
+            $('#addressUp').val(person.address);
+            $('#modalUpdate').modal('show')
+        })
+    }
+
+        const showModalDeposit = () => {
+            strBody.on('click', '.deposit', async function () {
+                $('.error-area').empty();
+                $('label.error').empty();
+
+                const id = $(this).data('id');
+
+                const reponse = await fetch('http://localhost:3300/persons/' + id);
+                const person = await reponse.json();
+
+                formDeposit.trigger('reset');
+
+                idDep.val(person.id);
+                fullNameDep.val(person.fullName);
+                emailDep.val(person.email);
+                balanceDep.val(person.balance);
+
+                modalDeposit.modal('show');
+            })
         }
 
-        btnCreate.addEventListener('click', async () => {
-            const fullName = document.getElementById('fullNameCre').value
-            const email = document.getElementById('emailCre').value
-            const phone = document.getElementById('phoneCre').value
-            const address = document.getElementById('addressCre').value
-            const balance = 0
-            const deleted = 0
+        const showModalWithdraw = () => {
+            strBody.on('click', '.withdraw', async function () {
+                $('.error-area').empty();
+                $('label.error').empty();
 
-            const obj = {
-                fullName,
-                email,
-                phone,
-                address,
-                balance,
-                deleted
+
+                const id = $(this).data('id');
+
+                const reponse = await fetch('http://localhost:3300/persons/' + id);
+                const person = await reponse.json();
+
+                formWithdraw.trigger('reset');
+
+                idWdr.val(person.id);
+                fullNameWith.val(person.fullName);
+                emailWith.val(person.email);
+                balanceWith.val(person.balance);
+
+                modalWithdraw.modal('show');
+            })
+        }
+
+        const showModalTransfer = () => {
+        strBody.on('click', '.transfer', async function () {
+            $('.error-area').empty();
+            $('label.error').empty();
+            totalAmountTr.val('')
+
+            const id = $(this).data('id');
+
+            const senderRes = await fetch('http://localhost:3300/persons/' + id);
+            const sender = await senderRes.json();
+
+            senderName.val(sender.fullName);
+            senderId.val(sender.id);
+            senderEmail.val(sender.email);
+            senderBalance.val(sender.balance);
+            fee.val(10);
+
+            transferAmount.val('');
+
+            transferAmount.on('change', () => {
+                let feeTr = parseFloat(fee.val());
+                let amountTr = parseFloat(transferAmount.val());
+                let totalAmount = Math.round(amountTr * (1 + feeTr / 100));
+                totalAmountTr.val(totalAmount);
+            })
+            console.log(persons);
+
+            let filteredRecipient = persons.filter(function (item) {
+                return item.id !== id;
+            })
+
+            selectOptionRecipientStr.empty();
+            console.log(filteredRecipient);
+
+            $.each(filteredRecipient, function (index, item) {
+                let str = renderNameRecipient(item);
+                selectOptionRecipientStr.append(str);
+            })
+
+            modalTransfer.modal('show');
+        })
+    }
+
+    const updatePerson = async () => {
+        btnUpdate.attr('disabled', true);
+        const id = $('#idUp').val();
+        const res = await fetch('http://localhost:3300/persons/' + id);
+        const personOld = await res.json();
+
+        let person = {
+            "id": id,
+            "fullName": fullNameUp.val(),
+            "email": emailUp.val(),
+            "phone": phoneUp.val(),
+            "address": addressUp.val(),
+            "balance": personOld.balance
+        }
+
+        const reponse = await fetch('http://localhost:3300/persons/' + id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(person)
+        })
+        refreshData();
+        modalUpdate.modal('hide');
+
+        webToast.Success({
+            status: 'Cập nhật thành công',
+            message: '',
+            delay: 2000,
+            align: 'topright'
+        });
+        tnUpdate.attr('disabled', false);
+
+    }
+
+    const deposit = async () => {
+        const transactionAmount = transactionAmountDep.val();
+        const balance = parseInt(balanceDep.val()) + parseInt(transactionAmount);
+        let person = {
+            "balance": balance
+        }
+
+        const reponse = await fetch('http://localhost:3300/persons/' + idDep.val(), {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(person)
+        })
+
+        modalDeposit.modal('hide');
+        refreshData();
+        webToast.Success({
+            status: 'Nạp tiền thành công',
+            message: '',
+            delay: 2000,
+            align: 'topright'
+        });
+
+    }
+
+    const withdraw = async () => {
+        const transactionAmount = transactionAmountWith.val();
+        const balance = parseInt(balanceWith.val()) - parseInt(transactionAmount);
+
+        if (balance <= 0) {
+            const message = "Số tiến trong tài khoản không đủ để rút";
+            $('.error-area').empty().append(message).removeClass('hide');
+
+        } else {
+            let person = {
+                "balance": balance
             }
 
-            const rawResponse = await fetch("http://localhost:3300/persons", {
-                method: 'POST',
+            const reponse = await fetch('http://localhost:3300/persons/' + idWdr.val(), {
+                method: 'PATCH',
                 headers: {
-                    "Content-type": "application/json; charset=UTF-8"
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(obj)
+                body: JSON.stringify(person)
+            })
+
+            modalWithdraw.modal('hide');
+            refreshData();
+            webToast.Success({
+                status: 'Rút tiền thành công',
+                message: '',
+                delay: 2000,
+                align: 'topright'
             });
 
-            const content = await rawResponse.json();
+        }
 
-            const str = renderPerson(content)
-            bodyCustomer.innerHTML += str;
 
-            closeModal('modalCreate')
+    }
 
-        })
+    const transfer = async () => {
+        const idSender = senderId.val();
+        const recipientId = selectOptionRecipientStr.val();
+        const amountTr = transferAmount.val();
+        const totalAmount = totalAmountTr.val();
 
-        btnUpdate.addEventListener('click', async () => {
-            const fullName = document.getElementById('fullNameUp').value
-            const email = document.getElementById('emailUp').value
-            const phone = document.getElementById('phoneUp').value
-            const address = document.getElementById('addressUp').value
+        const senderRes = await fetch('http://localhost:3300/persons/' + idSender);
+        const sender = await senderRes.json();
 
-            const obj = {
-                fullName,
-                email,
-                phone,
-                address
+        const recipientRes = await fetch('http://localhost:3300/persons/' + recipientId);
+        const recipient = await recipientRes.json();
+
+        const balanceSenderNew = parseFloat(sender.balance) - parseFloat(totalAmount);
+        const balanceRecipientNew = parseFloat(recipient.balance) + parseFloat(amountTr);
+
+        if (balanceSenderNew <= 0) {
+            const message = "Tài khoản không đủ tiền để chuyển";
+            $('.error-area').empty().append(message).removeClass('hide');
+        } else {
+            const personSender = {
+                "balance": balanceSenderNew
             }
 
-            const content = await fetchUpdatePerson(personId, obj)
+            const personRecipient = {
+                "balance": balanceRecipientNew
+            }
 
-            const updateRow = document.getElementById('tr_' + personId)
-            const str = renderPerson(content)
-            updateRow.innerHTML = str
+            const reponseSer = await fetch('http://localhost:3300/persons/' + idSender, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(personSender)
+            })
+            const senderNew = await reponseSer.json();
 
-            closeModal('modalUpdate')
+            const reponseRep = await fetch('http://localhost:3300/persons/' + recipientId, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(personRecipient)
+            })
+            const recipientNew = await reponseRep.json();
 
-            toastBody.innerText = 'Cập nhật thông tin thành công'
-            toastBootstrap.show()
+            const strS = renderPerson(senderNew);
+            const currentRowS = $('#tr_' + idSender);
+            currentRowS.replaceWith(strS);
 
-            setTimeout(() => {
-                btnCloseToast.click()
-            }, 2500);
-        })
+            const strR = renderPerson(recipientNew);
+            const currentRowR = $('#tr_' + recipientId);
+            currentRowR.replaceWith(strR);
 
-        btnDeposit.addEventListener('click', async () => {
-            const transaction = parseFloat(document.getElementById('transactionAmountDep').value);
-            if (isNaN(transaction) || transaction <= 0) {
-             toastBody.innerText = 'Số tiền giao dịch không hợp lệ';
-            toastBootstrap.show();
-             return;
+            webToast.Success({
+                status: 'Chuyển tiền thành công',
+                message: '',
+                delay: 2000,
+                align: 'topright'
+            });
+
+            modalTransfer.modal('hide');
+
+            const history = {
+                senderName: senderNew.fullName,
+                recipientName: recipientNew.fullName,
+                transferAmount: amountTr,
+                fee: fee.val(),
+                totalAmount: totalAmount,
+                date: new Date()
+            }
+
+
+            const responseHistory = await fetch('http://localhost:3300/histories', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(history)
+            })
+
+
         }
-        const balanceElement = document.getElementById('balanceDep');
-        const currentBalance = parseFloat(balanceElement.value);
-        const newBalance = currentBalance + transaction;
 
-        const obj = {
-        fullName: document.getElementById('fullNameDep').value,
-        email: document.getElementById('emailDep').value,
-        balance: newBalance,
-        transaction: transaction
-         };
-         const content = await fetchDepositPerson(personId, obj);
-         const updateRow = document.getElementById('tr_' + personId);
-         const str = renderPerson(content);
-         updateRow.innerHTML = str;
-         closeModal('modalDeposit');
-         toastBody.innerText = 'Nạp tiền thành công'
-         toastBootstrap.show()
-         setTimeout(() => {
-        btnCloseToast.click()
-         }, 2500);
+    }
+
+    formCreate.validate({
+        rules: {
+            fullNameCre: {
+                required: true,
+                minlength: 5,
+                maxlength: 25
+            },
+            emailCre: {
+                required: true,
+                isEmail: true
+            },
+            phoneCre: {
+                required: true,
+
+            }
+        },
+        messages: {
+            fullNameCre: {
+                required: 'Vui lòng nhập họ tên đầy đủ',
+                minlength: 'Họ tên tối thiểu là 5 ký tự',
+                maxlength: 'Họ tên tối đa là 25 ký tự'
+            },
+            emailCre: {
+                required: 'Vui lòng nhập email đầy đủ',
+            },
+            phoneCre: {
+                required: 'Vui lòng nhập phone đầy đủ'
+
+            }
+        },
+        submitHandler: function () {
+            createPerson();
+        }
+    })
+
+    formUpdate.validate({
+        rules: {
+            fullNameUp: {
+                required: true,
+                minlength: 5,
+                maxlength: 25
+            },
+            emailUp: {
+                required: true,
+                isEmail: true
+            },
+            phoneUp: {
+                required: true,
+
+            },
+            addressUp: {
+                required: true
+            }
+        },
+        messages: {
+            fullNameUp: {
+                required: 'Vui lòng nhập họ tên đầy đủ',
+                minlength: 'Họ tên tối thiểu là 5 ký tự',
+                maxlength: 'Họ tên tối đa là 25 ký tự'
+            },
+            emailUp: {
+                required: 'Vui lòng nhập email đầy đủ',
+            },
+            phoneUp: {
+                required: 'Vui lòng nhập phone đầy đủ'
+
+            },
+            addressUp: {
+                required: 'Vui lòng nhập địa chỉ đầy đủ'
+            }
+        },
+        submitHandler: function () {
+            updatePerson();
+
+        }
+    })
+
+        formDeposit.validate({
+            rules: {
+            transactionAmountDep: {
+            required: true,
+            isNumber: true,
+            min: 0,
+            max: 5000
+            }
+            },
+            messages: {
+            transactionAmountDep: {
+            required: 'Vui lòng nhập tiền giao dịch'
+            }
+            },
+        submitHandler: function () {
+            deposit();
+        }
+        });
+
+        $.validator.addMethod('enoughBalance', function(value, element) {
+        var currentBalance = parseFloat($('#balanceWith').val());
+        var transactionAmount = parseFloat(value);
+        return transactionAmount <= currentBalance;
+        }, 'Số tiền trong tài khoản không đủ');
+
+        formWithdraw.validate({
+        rules: {
+            transactionAmountWith: {
+            required: true,
+            isNumber: true,
+            min: 0,
+            max: 5000,
+            enoughBalance: true
+            }
+        },
+        messages: {
+            transactionAmountWith: {
+            required: 'Vui lòng nhập tiền giao dịch'
+            }
+        },
+        submitHandler: function () {
+            withdraw();
+        }
+        });
+
+    formTransfer.validate({
+        rules: {
+            amountTr: {
+                required: true,
+                isNumber: true
+            }
+        },
+        messages: {
+            amountTr: {
+                required: 'Vui lòng nhập tiền giao dịch'
+            }
+        },
+        submitHandler: function () {
+            transfer();
+        }
+    })
+
+
+    $.validator.addMethod("isEmail", function (value, element) {
+        return this.optional(element) || /^[a-z]+@[a-z]+\.[a-z]+$/i.test(value);
+    }, "Vui lòng nhập đúng định dạng email");
+
+    $.validator.addMethod("isNumber", function (value, element) {
+        return this.optional(element) || /^[0-9]*$/i.test(value);
+    }, "Vui lòng nhập tiền giao dịch bằng ký tự số");
+
+
+    const refreshData = () => {
+        strBody.empty();
+        getAllPersons();
+    };
+
+    $(() => {
+
+        getAllPersons();
+
+        deletePerson();
+
+        showModalUpdate();
+
+        showModalDeposit();
+
+        showModalWithdraw();
+
+        showModalTransfer();
+
+        btnHistory.on('click', () => {
+            strBodyHistory.empty();
+            getAllHistories();
+            modalHistory.modal('show')
         })
+
+        btnShowModalCreate.on('click', () => {
+            modalCreate.modal('show');
+        })
+
+        btnCreate.on('click', () => {
+            formCreate.trigger('submit');
+
+        })
+
+        btnUpdate.on('click', () => {
+            formUpdate.trigger('submit');
+        })
+
+        btnDeposit.on('click', () => {
+            formDeposit.trigger('submit');
+        })
+
+        btnWithdraw.on('click', () => {
+            formWithdraw.trigger('submit');
+        })
+
+        btnTransfer.on('click', () => {
+            formTransfer.trigger('submit');
+        })
+
+    })
+
+
+
+        // async function fetchALlPerson() {
+        //     const response = await fetch("http://localhost:3300/persons");
+        //     const persons = await response.json();
+        //     // return persons
+        //     const filteredPersons = persons.filter((person) => person.deleted == 0);
+        //      return filteredPersons;
+        //      console.log(filteredPersons)
+        // }
+
+        // // const getALlPerson = async () => {
+        // //     const persons = await fetchALlPerson();
+        // //     console.log(persons);
+
+        // //     persons.forEach(item => {
+        // //         const str = renderPerson(item)
+        // //         bodyCustomer.innerHTML += str;
+        // //     });
+
+        // //     const btnEditElems = document.querySelectorAll('.edit')
+        // //     const btnDeleteElems = document.querySelectorAll('.delete')
+        // //     const btnDepositElems = document.querySelectorAll('.deposit')
+        // //     const btnWithdrawElems = document.querySelectorAll('.withdraw')
+        // //     const btnTransferElems = document.querySelectorAll('.transfer')
+            
+          
+
+        // //     btnEditElems.forEach(item => {
+        // //         item.addEventListener('click', async () => {
+        // //             // const id = item.id.replace('data_', '')
+        // //             personId = item.getAttribute('data-id')
+
+        // //             const person = await getPersonById(personId);
+        // //             // console.log(person);
+
+        // //             openModal('modalUpdate')
+
+        // //             document.getElementById('fullNameUp').value = person.fullName
+        // //             document.getElementById('emailUp').value = person.email
+        // //             document.getElementById('phoneUp').value = person.phone
+        // //             document.getElementById('addressUp').value = person.address
+
+        // //         })
+        // //     })
+
+        // //     btnDepositElems.forEach(item => {
+        // //         item.addEventListener('click', async () => {
+        // //             // const id = item.id.replace('data_', '')
+        // //             personId = item.getAttribute('data-id')
+
+        // //             const person = await getPersonById(personId);
+        // //             // console.log(person);
+
+        // //             openModal('modalDeposit')
+
+        // //             document.getElementById('fullNameDep').value = person.fullName;
+        // //             document.getElementById('emailDep').value = person.email;
+        // //             document.getElementById('balanceDep').value = person.balance;
+        // //             document.getElementById('transactionAmountDep').value = 0;
+
+        // //         })
+        // //     })
+
+        // //     btnWithdrawElems.forEach(item => {
+        // //         item.addEventListener('click', async () => {
+        // //             // const id = item.id.replace('data_', '')
+        // //             personId = item.getAttribute('data-id')
+
+        // //             const person = await getPersonById(personId);
+        // //             // console.log(person);
+
+        // //             openModal('modalWithdraw')
+
+        // //             document.getElementById('fullNameWith').value = person.fullName;
+        // //             document.getElementById('emailWith').value = person.email;
+        // //             document.getElementById('balanceWith').value = person.balance;
+        // //             document.getElementById('transactionAmountWith').value = 0;
+        // //         })
+        // //     })
+            
+        // //     btnTransferElems.forEach(item => {
+        // //         item.addEventListener('click', async () => {
+        // //             try {
+        // //             const personId = item.getAttribute('data-id');
+        // //             const person = await getPersonById(personId);
+
+        // //             openModal('modalTransfer');
+        // //             const checkId = document.getElementById('idSender').value = person.id;
+        // //             document.getElementById('nameSender').value = person.fullName;
+        // //             document.getElementById('emailSender').value = person.email;
+        // //             document.getElementById('balanceSender').value = person.balance;
+
+        // //             const transferAmountInput = document.getElementById('transferAmount');
+        // //             const totalAmountInput = document.getElementById('totalAmount');
+        // //             const feesInput = document.getElementById('fees');
+                    
+        // //             const nameRecipientSelect = document.getElementById('nameRecipient');
+
+        // //             transferAmountInput.addEventListener('input', () => {
+        // //                 const transferAmount = parseFloat(transferAmountInput.value);
+        // //                 const fees = parseFloat(feesInput.value);
+        // //                 const totalAmount = transferAmount + (transferAmount * fees) / 100;
+        // //                 totalAmountInput.value = totalAmount.toFixed(2);
+        // //             });
+
+        // //             const persons = await fetchALlPerson();
+        // //             persons.forEach(person => {
+        // //                 if (person.id !== checkId) {
+        // //                 const option = document.createElement('option');
+        // //                 option.value = person.id;
+        // //                 option.textContent = person.fullName;
+        // //                 nameRecipientSelect.appendChild(option);
+        // //                 }
+        // //             });
+
+        // //             const btnTransfer = document.getElementById('btnTransfer');
+        // //             btnTransfer.addEventListener('click', async () => {
+        // //                 const senderId = document.getElementById('idSender').value;
+        // //                 const recipientId = nameRecipientSelect.value;
+        // //                 const transferAmount = parseFloat(transferAmountInput.value);
+
+        // //                 // Trừ tiền của người gửi
+        // //                 const sender = await getPersonById(senderId);
+        // //                 const updatedSenderBalance = sender.balance - transferAmount;
+        // //                 await updatePersonBalance(senderId, updatedSenderBalance);
+
+        // //                 // Tăng tiền của người nhận
+        // //                 const recipient = await getPersonById(recipientId);
+        // //                 const updatedRecipientBalance = recipient.balance + transferAmount;
+        // //                 await updatePersonBalance(recipientId, updatedRecipientBalance);
+
+        // //                 // Cập nhật số tiền hiện có của người gửi và người nhận
+        // //                 document.getElementById('balanceSender').value = updatedSenderBalance;
+        // //                 const recipientOption = nameRecipientSelect.querySelector(`option[value="${recipientId}"]`);
+        // //                 recipientOption.textContent = `${recipient.fullName} (${updatedRecipientBalance})`;
+
+        // //                 closeModal('modalTransfer');
+        // //             });
+        // //             } catch (error) {
+        // //             console.error('Error transferring money:', error);
+        // //             }
+        // //         });
+        // //         });
+
+            
+      
+        // //     btnDeleteElems.forEach(item => {
+        // //     item.addEventListener('click', () => {
+        // //     const personId = item.getAttribute('data-id')
+        // //     deletePerson(personId)
+        // //     })
+        // // })
+        // //  }
+
+        // const getPersonById = async (personId) => {
+        //     const response = await fetch("http://localhost:3300/persons/" + personId);
+        //     const person = await response.json();
+        //     return person
+        // }
+
+        // const fetchUpdatePerson = async (personId, obj) => {
+        //     const response = await fetch("http://localhost:3300/persons/" + personId, {
+        //         method: 'PATCH',
+        //         headers: {
+        //             "Content-type": "application/json; charset=UTF-8"
+        //         },
+        //         body: JSON.stringify(obj)
+        //     });
+        //     const person = await response.json();
+        //     return person
+        // }
+
+        // const fetchDepositPerson = async (personId, obj) => {
+        //     const response = await fetch("http://localhost:3300/persons/" + personId, {
+        //         method: 'PATCH',
+        //         headers: {
+        //             "Content-type": "application/json; charset=UTF-8"
+        //         },
+        //         body: JSON.stringify(obj)
+        //     });
+        //     const person = await response.json();
+        //     return person
+        // }
+
+        // const fetchWithdrawPerson = async (personId, obj) => {
+        //     const response = await fetch("http://localhost:3300/persons/" + personId, {
+        //         method: 'PATCH',
+        //         headers: {
+        //             "Content-type": "application/json; charset=UTF-8"
+        //         },
+        //         body: JSON.stringify(obj)
+        //     });
+        //     const person = await response.json();
+        //     return person
+        // }
+
+        // const deletePerson = async (personId) => {
+        // const confirmed = confirm("Bạn có chắc chắn muốn xóa khách hàng này?");
+
+        // if (!confirmed) {
+        // return;
+        // }
+
+        //  const response = await fetch(`http://localhost:3300/persons/${personId}`, {
+        // method: 'PATCH',
+        // headers: {
+        //     "Content-type": "application/json; charset=UTF-8"
+        // },
+        // body: JSON.stringify({ deleted: 1 })
+        //  });
+
+        // if (response.ok) {
+        // const deleteRow = document.getElementById('tr_' + personId);
+        // deleteRow.remove();
+
+        // toastBody.innerText = 'Xóa khách hàng thành công';
+        // toastBootstrap.show();
+
+        // setTimeout(() => {
+        //     btnCloseToast.click();
+        // }, 2500);
+        // } else {
+        // toastBody.innerText = 'Xóa khách hàng thất bại';
+        // toastBootstrap.show();
+
+        // setTimeout(() => {
+        //     btnCloseToast.click();
+        // }, 2500);
+        // }
+        // };
+
+
+       
     
-        btnWithdraw.addEventListener('click', async () => {
-            const transaction = parseFloat(document.getElementById('transactionAmountWith').value);
-            if (isNaN(transaction) || transaction <= 0) {
-             toastBody.innerText = 'Số tiền giao dịch không hợp lệ';
-            toastBootstrap.show();
-             return;
-        }
-        const balanceElement = document.getElementById('balanceWith');
-        const currentBalance = parseFloat(balanceElement.value);
-        if(transaction > currentBalance){
-            toastBody.innerText = 'Số tiền giao dịch không hợp lệ';
-            toastBootstrap.show();
-             return;
-        }
-        const newBalance = currentBalance - transaction;
+
+        // // const renderPerson = (obj) => {
+        // //     return `
+        // //         <tr id="tr_${obj.id}">
+        // //             <td>${obj.id}</td>
+        // //             <td>${obj.fullName}</td>
+        // //             <td>${obj.email}</td>
+        // //             <td>${obj.phone}</td>
+        // //             <td>${obj.address}</td>
+        // //             <td>${obj.balance}</td>
+        // //             <td>
+        // //                 <button class="btn btn-outline-secondary edit" id="data_${obj.id}" data-id="${obj.id}">
+        // //                     <i class="far fa-edit"></i>
+        // //                 </button>
+        // //             </td>
+        // //             <td>
+        // //                 <button class="btn btn-outline-success deposit" id="data_${obj.id}" data-id="${obj.id}">
+        // //                     <i class="fas fa-plus"></i>
+        // //                 </button>
+        // //             </td>
+        // //             <td>
+        // //                 <button class="btn btn-outline-warning withdraw" id="data_${obj.id}" data-id="${obj.id}">
+        // //                     <i class="fas fa-minus"></i>
+        // //                 </button>
+        // //             </td>
+        // //             <td>
+        // //                 <button class="btn btn-outline-primary transfer" id="data_${obj.id}" data-id="${obj.id}">
+        // //                     <i class="fas fa-exchange-alt"></i>
+        // //                 </button>
+        // //             </td>
+        // //             <td>
+        // //                 <button type="button" class="btn btn-outline-danger delete" id="data_${obj.id}" data-id="${obj.id}">
+        // //                     <i class="fas fa-ban"></i>
+        // //                 </button>
+        // //             </td>
+        // //         </tr>
+        // //     `
+        // // }
+
+        // btnCreate.addEventListener('click', async () => {
+        //     const fullName = document.getElementById('fullNameCre').value
+        //     const email = document.getElementById('emailCre').value
+        //     const phone = document.getElementById('phoneCre').value
+        //     const address = document.getElementById('addressCre').value
+        //     const balance = 0
+        //     const deleted = 0
+
+        //     const obj = {
+        //         fullName,
+        //         email,
+        //         phone,
+        //         address,
+        //         balance,
+        //         deleted
+        //     }
+
+        //     const rawResponse = await fetch("http://localhost:3300/persons", {
+        //         method: 'POST',
+        //         headers: {
+        //             "Content-type": "application/json; charset=UTF-8"
+        //         },
+        //         body: JSON.stringify(obj)
+        //     });
+
+        //     const content = await rawResponse.json();
+
+        //     const str = renderPerson(content)
+        //     bodyCustomer.innerHTML += str;
+
+        //     closeModal('modalCreate')
+
+        // })
+
+        // btnUpdate.addEventListener('click', async () => {
+        //     const fullName = document.getElementById('fullNameUp').value
+        //     const email = document.getElementById('emailUp').value
+        //     const phone = document.getElementById('phoneUp').value
+        //     const address = document.getElementById('addressUp').value
+
+        //     const obj = {
+        //         fullName,
+        //         email,
+        //         phone,
+        //         address
+        //     }
+
+        //     const content = await fetchUpdatePerson(personId, obj)
+
+        //     const updateRow = document.getElementById('tr_' + personId)
+        //     const str = renderPerson(content)
+        //     updateRow.innerHTML = str
+
+        //     closeModal('modalUpdate')
+
+        //     toastBody.innerText = 'Cập nhật thông tin thành công'
+        //     toastBootstrap.show()
+
+        //     setTimeout(() => {
+        //         btnCloseToast.click()
+        //     }, 2500);
+        // })
+        // async function updatePersonBalance(personId, newBalance) {
+        // try {
+        //  const url = `http://localhost:3300//persons/${personId}`;
+        //  const requestOptions = {
+        //  method: 'PUT',
+        //  headers: { 'Content-Type': 'application/json' },
+        //  body: JSON.stringify({ balance: newBalance })
+        //     };
+        //     const response = await fetch(url, requestOptions);
+        //     if (!response.ok) {
+        //     throw new Error('Failed to update person balance');
+        //     }
+
+        //     // Trả về kết quả cập nhật thành công
+        //     return true;
+        // } catch (error) {
+        //     // Xử lý lỗi nếu có
+        //     console.error('Error updating person balance:', error);
+        //     throw error;
+        // }
+        // }
+
+        // btnDeposit.addEventListener('click', async () => {
+        //     const transaction = parseFloat(document.getElementById('transactionAmountDep').value);
+        //     if (isNaN(transaction) || transaction <= 0) {
+        //      toastBody.innerText = 'Số tiền giao dịch không hợp lệ';
+        //     toastBootstrap.show();
+        //      return;
+        // }
+        // const balanceElement = document.getElementById('balanceDep');
+        // const currentBalance = parseFloat(balanceElement.value);
+        // const newBalance = currentBalance + transaction;
+
+        // const obj = {
+        // fullName: document.getElementById('fullNameDep').value,
+        // email: document.getElementById('emailDep').value,
+        // balance: newBalance,
+        // transaction: transaction
+        //  };
+        //  const content = await fetchDepositPerson(personId, obj);
+        //  const updateRow = document.getElementById('tr_' + personId);
+        //  const str = renderPerson(content);
+        //  updateRow.innerHTML = str;
+        //  closeModal('modalDeposit');
+        //  toastBody.innerText = 'Nạp tiền thành công'
+        //  toastBootstrap.show()
+        //  setTimeout(() => {
+        // btnCloseToast.click()
+        //  }, 2500);
+        // })
+    
+        // btnWithdraw.addEventListener('click', async () => {
+        //     const transaction = parseFloat(document.getElementById('transactionAmountWith').value);
+        //     if (isNaN(transaction) || transaction <= 0) {
+        //      toastBody.innerText = 'Số tiền giao dịch không hợp lệ';
+        //     toastBootstrap.show();
+        //      return;
+        // }
+        // const balanceElement = document.getElementById('balanceWith');
+        // const currentBalance = parseFloat(balanceElement.value);
+        // if(transaction > currentBalance){
+        //     toastBody.innerText = 'Số tiền giao dịch không hợp lệ';
+        //     toastBootstrap.show();
+        //      return;
+        // }
+        // const newBalance = currentBalance - transaction;
         
 
-        const obj = {
-        fullName: document.getElementById('fullNameWith').value,
-        email: document.getElementById('emailWith').value,
-        balance: newBalance,
-        transaction: transaction
-         };
-         const content = await fetchWithdrawPerson(personId, obj);
-         const updateRow = document.getElementById('tr_' + personId);
-         const str = renderPerson(content);
-         updateRow.innerHTML = str;
-         closeModal('modalWithdraw');
-         toastBody.innerText = 'Rút tiền thành công'
-         toastBootstrap.show()
-         setTimeout(() => {
-        btnCloseToast.click()
-         }, 2500);
-        })
+        // const obj = {
+        // fullName: document.getElementById('fullNameWith').value,
+        // email: document.getElementById('emailWith').value,
+        // balance: newBalance,
+        // transaction: transaction
+        //  };
+        //  const content = await fetchWithdrawPerson(personId, obj);
+        //  const updateRow = document.getElementById('tr_' + personId);
+        //  const str = renderPerson(content);
+        //  updateRow.innerHTML = str;
+        //  closeModal('modalWithdraw');
+        //  toastBody.innerText = 'Rút tiền thành công'
+        //  toastBootstrap.show()
+        //  setTimeout(() => {
+        // btnCloseToast.click()
+        //  }, 2500);
+        // })
     
          
-        function openModal(elem) {
-            let el = document.getElementById(elem);
-            new bootstrap.Modal(el).show();
-        }
+        // function openModal(elem) {
+        //     let el = document.getElementById(elem);
+        //     new bootstrap.Modal(el).show();
+        // }
 
-        function closeModal(elem) {
-            document.getElementById(elem).style.display = "none"
-            document.getElementById(elem).classList.remove("show")
-            document.querySelector('.modal-backdrop').remove();
-            document.querySelector('body').setAttribute('style', 'overflow: none')
-        }
+        // function closeModal(elem) {
+        //     document.getElementById(elem).style.display = "none"
+        //     document.getElementById(elem).classList.remove("show")
+        //     document.querySelector('.modal-backdrop').remove();
+        //     document.querySelector('body').setAttribute('style', 'overflow: none')
+        // }
 
 
-        getALlPerson()
+        // getALlPerson()
     </script>
 </body>
 

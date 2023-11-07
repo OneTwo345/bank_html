@@ -42,3 +42,29 @@ footer.error {
 .notification p.error {
     color: #b05965;
 }
+
+.error-area {
+    padding: 0px 20px;
+    /*margin-bottom: 15px;*/
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+.error-area ul {
+    margin-left: -2rem;
+}
+
+label.error {
+    /* display: list-item; */
+}
+
+input.error {
+    border: solid 1px red;
+}
+.toastContainer.toastmiddlecenter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
